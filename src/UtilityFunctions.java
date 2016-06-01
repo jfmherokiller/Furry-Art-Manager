@@ -1,6 +1,7 @@
 import java.io.Console;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,10 +16,18 @@ public class UtilityFunctions {
         String FileName = Paths.get(ImgLoc).getFileName().toString();
         return FileName.substring(0,FileName.length()-3);
     }
+    public static String GetOperatingPath()
+    {
+        return URLDecoder.decode(ClassLoader.getSystemClassLoader().getResource(".").getPath());
+    }
+    public static Path GetOperatingRepo()
+    {
+        String location = GetOperatingPath();
+        return Paths.get(location,"FurArtRepo");
+    }
     public static Path GetAuthDir( String author)
     {
-        String location = ClassLoader.getSystemClassLoader().getResource(".").getPath();
-        return Paths.get(location,"FurArtRepo",author);
+        return Paths.get(GetOperatingRepo().toString(),author);
     }
     public static Path GetNewImageLocation(String ImageLoc,String Author)
     {
@@ -31,7 +40,8 @@ public class UtilityFunctions {
     }
     public static void MakeAuthDir( String AuthorLoc)
     {
-        GetAuthDir(AuthorLoc).toFile().mkdir();
+        File tehfile = GetAuthDir(AuthorLoc).toFile();
+        tehfile.mkdirs();
     }
     public static void PrintLineToConsole(String line)
     {
