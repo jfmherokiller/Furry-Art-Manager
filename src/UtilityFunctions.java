@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +10,11 @@ import java.nio.file.StandardCopyOption;
  * Created by jfmmeyers on 5/31/16.
  */
 public class UtilityFunctions {
+    public static String GetFileNameWithoutExtension(String ImgLoc)
+    {
+        String FileName = Paths.get(ImgLoc).getFileName().toString();
+        return FileName.substring(0,FileName.length()-3);
+    }
     public static Path GetAuthDir( String author)
     {
         String location = ClassLoader.getSystemClassLoader().getResource(".").getPath();
@@ -26,5 +32,9 @@ public class UtilityFunctions {
     public static void MakeAuthDir( String AuthorLoc)
     {
         GetAuthDir(AuthorLoc).toFile().mkdir();
+    }
+    public static void PrintLineToConsole(String line)
+    {
+        System.out.println(line);
     }
 }

@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.util.LinkedList;
 
 /**
@@ -18,7 +19,22 @@ public class ImgDatabase {
         }
         return Dtbinstance;
     }
-    public void AddImage(String Imgfilepath,String TagsFileLoc,String ImgTitle, String DescriptionFilePath,String theAuthor) {
+    public void AddImage(String Imgfilepath,String TagsFileLoc,String ImgTitle, String DescriptionFileLoc,String theAuthor) {
+        UtilityFunctions.MakeAuthDir(theAuthor);
 
+        Images.add( new ImageData(Imgfilepath,null,ImgTitle,DescriptionFileLoc,theAuthor));
+    }
+
+    public LinkedList<ImageData> GetImages()
+    {
+        return Images;
+    }
+    public void SetImages(LinkedList<ImageData> dtb)
+    {
+        Images = dtb;
+    }
+    public void TestAdd()
+    {
+        AddImage("","","","","");
     }
 }
