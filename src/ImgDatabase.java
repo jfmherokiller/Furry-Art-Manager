@@ -35,6 +35,9 @@ public class ImgDatabase {
     }
     public void TestAdd()
     {
-        AddImage("","","","","");
+        for (int i = 0; i < 10; i++) {
+            AddImage( i+"",i+"",i+"",i+"",i+"");
+        }
+
     }
 }
